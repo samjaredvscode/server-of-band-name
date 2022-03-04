@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket Server</title>
+</head>
+<body>
+    <h1>Acceso Denegado</h1>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        var client = io();
+        client.on('connect', function() {
+            console.log('Conectado al servidor');
+
+        });
+
+        client.on('disconnect', function(){
+            console.log('Desconectado del servior');
+        });
+
+        client.emit('mensaje', { nombre: 'Jared' });
+
+        client.on('mensaje', function( payload )  {
+            console.log('Escuchando: ', payload);
+
+        });
+        
+        client.on('nuevo-mensaje', function( payload )  {
+            console.log('Escuchando: ', payload);
+        });
+
+        // Bandas activas
+
+        client.on('active-bands', function( bands )  {
+            console.clear();
+            console.table( bands );
+        });
+
+    </script>
+</body>
+</html>
+
+
+
